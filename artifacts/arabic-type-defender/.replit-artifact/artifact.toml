@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Arabic Type Defender"
+version = "1.0.0"
+id = "artifacts/arabic-type-defender"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20431
+
+[services.development]
+run = "pnpm --filter @workspace/arabic-type-defender run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/arabic-type-defender", "run", "build" ]
+publicDir = "artifacts/arabic-type-defender/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20431"
+BASE_PATH = "/"
